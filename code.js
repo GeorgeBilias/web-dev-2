@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const categoriesContainer = document.getElementById("categories-container");
 
+    let globalListings;
+
     // Fetch categories from the WikiAds API
     fetch("https://wiki-ads.onrender.com/categories")
         .then(response => response.json())
@@ -15,7 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     .then(response => response.json());
             }
 
-            // Use Promise.all to fetch subcategories for all categories
+            // Define a function to fetch listings for a given subcategory
+            function fetchListings(subcategoryId) {
+                return fetch(`https://wiki-ads.onrender.com/ads?subcategory=${subcategoryId}`)
+                    .then(response => response.json());
+            }
+
+            // Use Promise.all to fetch subcategories and listings for all categories
             Promise.all(categories.map(category => fetchSubcategories(category.id)))
                 .then(subcategoriesArray => {
                     categories.forEach((category, index) => {
@@ -30,9 +38,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     categoryLinks.forEach(link => {
                         link.addEventListener("click", function (event) {
                             event.preventDefault();
-                            const categoryId = this.getAttribute("data-id");
-                            // Redirect to the category page with the selected category ID
-                            window.location.href = `/category.html?id=${categoryId}`;
+                            const subcategoryId = this.getAttribute("data-id");
+                            
+                            // Fetch listings for the selected subcategory
+                            fetchListings(subcategoryId)
+                                .then(listings => {
+                                    // Save the listings to local storage or a global variable
+                                    // Redirect to the subcategories page
+                                    window.location.href = `/subcategory.html?subcategory=${subcategoryId}`;
+                                })
+                                .catch(error => console.error("Error fetching listings:", error));
                         });
                     });
                 })
@@ -40,4 +55,5 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Error fetching categories:", error));
 });
+
 
