@@ -1,6 +1,13 @@
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
+    
+    // Get the container for categories from the DOM
     const categoriesContainer = document.getElementById("categories-container");
 
+    // Variable to store the fetched listings globally
     let globalListings;
 
     // Fetch categories from the WikiAds API
@@ -23,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     .then(response => response.json());
             }
 
+        
+
             // Use Promise.all to fetch subcategories and listings for all categories
             Promise.all(categories.map(category => fetchSubcategories(category.id)))
                 .then(subcategoriesArray => {
@@ -30,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         category.subcategories = subcategoriesArray[index];
                     });
 
+                    // Render the categories using the Handlebars template
                     const html = template({ categories });
                     categoriesContainer.innerHTML = html;
 
@@ -39,11 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         link.addEventListener("click", function (event) {
                             event.preventDefault();
                             const subcategoryId = this.getAttribute("data-id");
-                            
+
                             // Fetch listings for the selected subcategory
                             fetchListings(subcategoryId)
                                 .then(listings => {
                                     // Save the listings to local storage or a global variable
+                                    globalListings = listings;
+
                                     // Redirect to the subcategories page
                                     window.location.href = `/subcategory.html?subcategory=${subcategoryId}`;
                                 })
@@ -54,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 .catch(error => console.error("Error fetching subcategories:", error));
         })
         .catch(error => console.error("Error fetching categories:", error));
+
+    
+
+    
 });
-
-

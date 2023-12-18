@@ -9,8 +9,33 @@
     <h1>Listings for Subcategory</h1>
     <div id="listings-container"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-    <script src="code.js"></script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+    <script src="sub.js"></script>
+    
 
+    
+    <script id="listing-template" type="text/x-handlebars-template">
+        {{#each listings}}
+            <div class="listing">
+                <h3>{{title}}</h3>
+                <ul>
+                    <li>Features: {{features}}</li>
+                    <li>Images: 
+                        <ul>
+                            {{#each images}}
+                                <li>
+                                    <img src="https://wiki-ads.onrender.com/{{url}}" alt="{{caption}}" height="200px">
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    <li>Description: {{description}}</li>
+                    <li>Cost: {{cost}}</li>
+                </ul>
+            </div>
+        {{/each}}
+    </script>
+    
+</body>
 </html>

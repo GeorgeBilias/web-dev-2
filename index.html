@@ -10,6 +10,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
     <script src="code.js"></script>
+    
 </body>
 
 <script id="category-template" type="text/x-handlebars-template">
@@ -21,11 +22,12 @@
             </a>
             <ul>
                 {{#each subcategories}}
-                    <li><a href="#" class="category-link" data-id="{{id}}">{{title}}</a></li> <!-- leads to subcategory page -->
+                    <li><a href="subcategory.html?subcategory={{id}}">{{title}}</a></li> <!-- leads to subcategory page -->
                 {{/each}}
             </ul>
         </div>
     {{/each}}
+
 </script>
 
 
