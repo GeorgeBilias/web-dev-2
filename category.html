@@ -21,11 +21,11 @@
                     <li>Features: {{features}}</li>
                     <li>Images: 
                         <ul>
-                            {{#each images}}
-                                <li>
-                                    <img src="{{url}}" alt="{{caption}}" height="200px">
-                                </li>
-                            {{/each}}
+                            {{#if images.[0]}} <!-- Check if there is at least one image -->
+                            <li>
+                                <img src="https://wiki-ads.onrender.com/{{images.[0]}}" alt="" height="200px">
+                            </li>
+                            {{/if}}
                         </ul>
                     </li>
                     <li>Description: {{description}}</li>
