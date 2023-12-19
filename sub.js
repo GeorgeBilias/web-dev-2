@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const subcategoryId = urlParams.get('subcategory');
 
+    Handlebars.registerHelper('split', function(context, separator) {
+        return context.split(separator);
+    });
 
     console.log("Subcategory ID:", subcategoryId);
 

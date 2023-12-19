@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Listings for Subcategory</h1>
     <div id="listings-container"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -20,8 +19,19 @@
         {{#each listings}}
             <div class="listing">
                 <h3>{{title}}</h3>
+                <table>
+                    <tbody>
+                        {{#each (split features ';')}}
+                            {{#with (split this ':')}}
+                                <tr>
+                                    <td>{{this.[0]}}</td>
+                                    <td>{{this.[1]}}</td>
+                                </tr>
+                            {{/with}}
+                        {{/each}}
+                    </tbody>
+                </table>
                 <ul>
-                    <li>Features: {{features}}</li>
                     <li>Images: 
                         <ul>
                             {{#each images}}
