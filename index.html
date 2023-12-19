@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WikiAds Categories</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="categories-container"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
     <script src="code.js"></script>
+
+    <script id="category-template" type="text/x-handlebars-template">
+        {{#each categories}}
+            <div>
+                <h2>{{title}}</h2>
+                <a href="category.html?id={{id}}"> <!-- leads to category page --> 
+                    <img src="https://wiki-ads.onrender.com/{{img_url}}" alt="{{title}}">
+                </a>
+                <ul>
+                    {{#each subcategories}}
+                        <li><a href="subcategory.html?subcategory={{id}}">{{title}}</a></li> <!-- leads to subcategory page -->
+                    {{/each}}
+                </ul>
+            </div>
+        {{/each}}
+    
+    </script>
     
 </body>
-
-<script id="category-template" type="text/x-handlebars-template">
-    {{#each categories}}
-        <div>
-            <h2>{{title}}</h2>
-            <a href="category.html?id={{id}}"> <!-- leads to category page --> 
-                <img src="https://wiki-ads.onrender.com/{{img_url}}" alt="{{title}}">
-            </a>
-            <ul>
-                {{#each subcategories}}
-                    <li><a href="subcategory.html?subcategory={{id}}">{{title}}</a></li> <!-- leads to subcategory page -->
-                {{/each}}
-            </ul>
-        </div>
-    {{/each}}
-
-</script>
-
 
 </html>
