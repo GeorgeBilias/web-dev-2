@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('fonts/Robot9000-MVxZx.ttf') format('woff2'); 
+  }
+  .title h1 {
+    font-family: 'MyFont', sans-serif;
+  }
+  
 body, h1, h2, h3, h4, h5, h6, p, ul, ol,li {
     margin: 0;
     padding: 0;
@@ -7,6 +15,18 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol,li {
     font-family: Arial, sans-serif;
     background-color: rgb(255,255,255);
   }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+}
+
+
 
   
 /* HEADER */
@@ -210,3 +230,101 @@ header {
     background-color: transparent;
     text-decoration: underline;
   }
+
+  /* Category Listings */
+
+  .listings {  
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .grid {
+    margin:15%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); 
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .grid li {
+    list-style: none;
+  }
+
+  .grid .listing img {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    border-radius: 5px;
+  }
+
+  .grid .listing .cost {
+    margin-top: 3%;
+    font-weight: bold;
+  }
+ 
+  .listing {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 7%;
+  }
+  .grid li h5{
+    color:#555;
+  }
+
+
+/* Subcategory Listings */
+
+.listings2 {  
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.grid2 {
+  margin:15%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(700px, 1fr)); 
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.grid2 li {
+  list-style: none;
+}
+
+.grid2 .listing img {
+  margin-top: 5%;
+  margin-bottom: 3%;
+  border-radius: 5px;
+}
+
+.grid2 .listing2 .cost {
+  margin-top: 3%;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.listing2 {
+  border: 1px solid #ddd;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 7%;
+}
+.grid2 li h5{
+  color:#555;
+}
+
+.grid2 .table{
+  margin-top: 5%;
+  margin-bottom: 3%;
+  border-radius: 5px;
+}

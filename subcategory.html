@@ -12,7 +12,7 @@
 
         <div class="title">
             <img src="photos/logo/unique_logo.png" alt="logo" width="100" height="100">
-            <h1>TCMarketplace</h1>  
+            <h1>WikiAds</h1>  
         </div>
 
         
@@ -35,36 +35,42 @@
 
     
  <script id="listing-template" type="text/x-handlebars-template">
-        {{#each listings}}
-            <div class="listing">
-                <h3>{{title}}</h3>
-                <table>
-                    <tbody>
-                        {{#each (split features ';')}}
-                            {{#with (split this ':')}}
-                                <tr>
-                                    <td>{{this.[0]}}</td>
-                                    <td>{{this.[1]}}</td>
-                                </tr>
-                            {{/with}}
-                        {{/each}}
-                    </tbody>
-                </table>
-                <ul>
-                    <li>Images: 
+        <div class="listings2">
+            <ol class="grid2">
+                {{#each listings}}
+                    <li class="listing2">
+                        <h3>{{title}}</h3>
                         <ul>
-                            {{#each images}}
-                            <li>
-                                <img src="https://wiki-ads.onrender.com/{{this}}" alt="" height="200px">
+                            <li class="img">
+                                <ul>
+                                    {{#each images}}
+                                    <li>
+                                        <img src="https://wiki-ads.onrender.com/{{this}}" alt="" height="200px">
+                                    </li>
+                                {{/each}}
+                                </ul>
                             </li>
-                        {{/each}}
+                            <li>{{description}}</li>
+                            <table class="table">
+                            <tbody>
+                                {{#each (split features ';')}}
+                                    {{#with (split this ':')}}
+                                        <tr>
+                                            <td>{{this.[0]}}</td>
+                                            <td>{{this.[1]}}</td>
+                                        </tr>
+                                    {{/with}}
+                                {{/each}}
+                            </tbody>
+                        </table>
+                            <div class="cost">
+                                <li class="cost">{{cost}} €</li>
+                            </div>
                         </ul>
                     </li>
-                    <li>Description: {{description}}</li>
-                    <li>Cost: {{cost}}</li>
-                </ul>
-            </div>
-        {{/each}}
+                {{/each}}
+            </ol>
+        </div>
     </script>
 
     <footer>

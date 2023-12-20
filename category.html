@@ -13,7 +13,7 @@
 
         <div class="title">
             <img src="photos/logo/unique_logo.png" alt="logo" width="100" height="100">
-            <h1>TCMarketplace</h1>  
+            <h1>WikiAds</h1>  
         </div>
 
         
@@ -34,24 +34,28 @@
     <script src="cat.js"></script>
 
     <script id="listing-template" type="text/x-handlebars-template">
-        {{#each listings}}
-            <div class="listing">
-                <h3>{{title}}</h3>
-                <ul>
-                    <li>Images: 
+        <div class="listings"></div>
+            <ol class="grid">
+                {{#each listings}}
+                    <li class="listing">
+                        <h3>{{title}}</h3>
                         <ul>
-                            {{#if images.[0]}} <!-- Check if there is at least one image -->
                             <li>
-                                <img src="https://wiki-ads.onrender.com/{{images.[0]}}" alt="" height="200px">
+                                <ul>
+                                    <li class="img">
+                                        <img src="https://wiki-ads.onrender.com/{{images.[0]}}" alt="" height="200px">
+                                    </li>
+                                </ul>
                             </li>
-                            {{/if}}
+                            <li>{{description}}</li>
+                            <div class="cost">
+                                <li class="cost">{{cost}} €</li>
+                            </div>
                         </ul>
                     </li>
-                    <li>Description: {{description}}</li>
-                    <li>Cost: {{cost}}</li>
-                </ul>
-            </div>
-        {{/each}}
+                {{/each}}
+            </ol>
+        </div>
     </script>
 
     <footer>
