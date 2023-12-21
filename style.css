@@ -243,7 +243,7 @@ header {
   .grid {
     margin:15%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 20px;
     list-style: none;
     padding: 0;
@@ -254,6 +254,8 @@ header {
   }
 
   .grid .listing img {
+    width: 100%;
+    height: auto;
     margin-top: 5%;
     margin-bottom: 3%;
     border-radius: 5px;
@@ -289,7 +291,7 @@ header {
 .grid2 {
   margin:15%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(700px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); 
   gap: 20px;
   list-style: none;
   padding: 0;
@@ -299,9 +301,8 @@ header {
   list-style: none;
 }
 
-.grid2 .listing img {
+.grid2 .listing2 img {
   margin-top: 5%;
-  margin-bottom: 3%;
   border-radius: 5px;
 }
 
@@ -327,4 +328,25 @@ header {
   margin-top: 5%;
   margin-bottom: 3%;
   border-radius: 5px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.grid2 th, .grid2 td {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.image-container img {
+  display: inline;
+  margin: 10px;
+  border-radius: 10px;
 }

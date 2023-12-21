@@ -43,11 +43,11 @@
                         <ul>
                             <li class="img">
                                 <ul>
-                                    {{#each images}}
-                                    <li>
-                                        <img src="https://wiki-ads.onrender.com/{{this}}" alt="" height="200px">
-                                    </li>
-                                {{/each}}
+                                    <div class="'img-container">
+                                        {{#each images}}
+                                            <img src="https://wiki-ads.onrender.com/{{this}}" alt="" height="200px">
+                                    {{/each}}
+                                    </div>
                                 </ul>
                             </li>
                             <li>{{description}}</li>
