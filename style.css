@@ -350,3 +350,181 @@ header {
   margin: 10px;
   border-radius: 10px;
 }
+
+  /* Media Queries for Responsive Design */
+
+  html,body{
+    overflow-x: hidden;
+  }
+
+
+  
+aside {
+  display: grid; 
+} 
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  gap: 20px;
+}
+
+
+
+ /* Mobile phones */
+  
+ @media only screen and (max-width: 600px) {
+  body, html {
+    width: 100%; 
+    margin: 0; 
+    padding: 0; 
+  }
+
+  header {
+    padding: 1rem 0;
+  }
+
+  .title, .main-bar {
+    width: 100%; 
+  }
+
+  .title {
+    padding: 0 5%; 
+    box-sizing: border-box; 
+  }
+
+  .title h1 {
+    font-size: 26px;
+  }
+
+  .main-bar {
+    flex-direction: column; 
+    align-items: center; 
+    padding: 10px; 
+    box-sizing: border-box; 
+  }
+
+  .main-bar li {
+    display: block;
+    margin: 10px 0;
+  } 
+
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .grid2 {
+    grid-template-columns: repeat(1, minmax(350px, 2fr));
+    margin-right: 15%;
+  } 
+  .grid2 li img{
+    width:fit-content;
+  } 
+
+  .footer-container {
+    grid-template-columns: 1fr;
+  } 
+
+  .footer-links {
+    margin-right: 19%;
+     
+  } 
+
+  .footer-links {
+    text-align: center;
+    display: block; 
+    margin: 10px 0; 
+    text-align: center;
+  
+  } 
+}
+
+  
+  /* tablets */
+  
+  @media only screen and (min-width:601px) and (max-width: 1200px) {
+    .title {
+      padding: 0 5%;
+    } 
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center;
+      gap: 20px;
+    }
+    body {
+      grid-template-columns: 200px 1fr; 
+      grid-template-areas:
+        "header header"
+        "aside main"
+        "footer footer";
+    } 
+    .main{
+      grid-area: main;
+    } 
+    .aside{
+      grid-area: aside;
+      background-color: #f2f2f2;
+    }
+    header,
+    footer {
+      grid-column: span 2; 
+    }  
+    
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+    } 
+  
+    .footer-links {
+      text-align: center;
+      display: block;
+      margin: 10px 0; 
+      text-align: center;
+    
+    } 
+  }
+
+  /* desktops */
+  @media screen and (min-width: 1201px) {
+    .title {
+      padding: 0 5%;
+    } 
+    body {
+      grid-template-columns: 200px 1fr 200px; 
+      grid-template-areas:
+        "header header header"
+        "aside main empty" 
+        "footer footer footer";
+    } 
+    body::after{
+      content: "";
+      grid-area: empty;
+      background-color: #f2f2f2;
+    } 
+    
+    .main{
+      grid-area: main;
+    } 
+  
+    header,
+    footer {
+      grid-column: span 3;
+    } 
+    
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+    } 
+  
+    .footer-links {
+      text-align: center;
+      display: block; 
+      margin: 10px 0; 
+      text-align: center;
+    
+    } 
+    
+  }

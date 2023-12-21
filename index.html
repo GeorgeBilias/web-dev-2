@@ -25,32 +25,36 @@
         
     </header>
 
-    <div id="categories-container"></div>
+    <main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-    <script src="code.js"></script>
+        <div id="categories-container"></div>
 
-    <script id="category-template" type="text/x-handlebars-template">
-        <div>
-            <ol class="grid3">
-                {{#each categories}}
-                    <li>
-                        <div class="category">
-                            <h2>{{title}}</h2>
-                            <a href="category.html?id={{id}}"> <!-- leads to category page --> 
-                                <img src="https://wiki-ads.onrender.com/{{img_url}}" alt="{{title}}">
-                            </a>
-                            
-                            {{#each subcategories}}
-                                <a href="subcategory.html?subcategory={{id}}">{{title}}</a><br> <!-- leads to subcategory page -->
-                            {{/each}}
-                            
-                        </div>
-                    </li>
-                {{/each}}
-            </ol>
-        </div>
-    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+        <script src="code.js"></script>
+
+        <script id="category-template" type="text/x-handlebars-template">
+            <div>
+                <ol class="grid3">
+                    {{#each categories}}
+                        <li>
+                            <div class="category">
+                                <h2>{{title}}</h2>
+                                <a href="category.html?id={{id}}"> <!-- leads to category page --> 
+                                    <img src="https://wiki-ads.onrender.com/{{img_url}}" alt="{{title}}">
+                                </a>
+                                
+                                {{#each subcategories}}
+                                    <a href="subcategory.html?subcategory={{id}}">{{title}}</a><br> <!-- leads to subcategory page -->
+                                {{/each}}
+                                
+                            </div>
+                        </li>
+                    {{/each}}
+                </ol>
+            </div>
+        </script>
+    
+    </main>
 
     <footer>
         <div class="footer-container">

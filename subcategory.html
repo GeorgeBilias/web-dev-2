@@ -26,52 +26,56 @@
         
     </header>
 
-    <div id="listings-container"></div>
+    <main>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-    <script src="sub.js"></script>
-    
+        <div id="listings-container"></div>
 
-    
- <script id="listing-template" type="text/x-handlebars-template">
-        <div class="listings2">
-            <ol class="grid2">
-                {{#each listings}}
-                    <li class="listing2">
-                        <h3>{{title}}</h3>
-                        <ul>
-                            <li class="img">
-                                <ul>
-                                    <div class="'img-container">
-                                        {{#each images}}
-                                            <img src="https://wiki-ads.onrender.com/{{this}}" alt="" height="200px">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+        <script src="sub.js"></script>
+        
+
+        
+    <script id="listing-template" type="text/x-handlebars-template">
+            <div class="listings2">
+                <ol class="grid2">
+                    {{#each listings}}
+                        <li class="listing2">
+                            <h3>{{title}}</h3>
+                            <ul>
+                                <li class="img">
+                                    <ul>
+                                        <div class="'img-container">
+                                            {{#each images}}
+                                                <img src="https://wiki-ads.onrender.com/{{this}}" alt="" height="200px">
+                                        {{/each}}
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li>{{description}}</li>
+                                <table class="table">
+                                <tbody>
+                                    {{#each (split features ';')}}
+                                        {{#with (split this ':')}}
+                                            <tr>
+                                                <td>{{this.[0]}}</td>
+                                                <td>{{this.[1]}}</td>
+                                            </tr>
+                                        {{/with}}
                                     {{/each}}
-                                    </div>
-                                </ul>
-                            </li>
-                            <li>{{description}}</li>
-                            <table class="table">
-                            <tbody>
-                                {{#each (split features ';')}}
-                                    {{#with (split this ':')}}
-                                        <tr>
-                                            <td>{{this.[0]}}</td>
-                                            <td>{{this.[1]}}</td>
-                                        </tr>
-                                    {{/with}}
-                                {{/each}}
-                            </tbody>
-                        </table>
-                            <div class="cost">
-                                <li class="cost">{{cost}} €</li>
-                            </div>
-                        </ul>
-                    </li>
-                {{/each}}
-            </ol>
-        </div>
-    </script>
+                                </tbody>
+                            </table>
+                                <div class="cost">
+                                    <li class="cost">{{cost}} €</li>
+                                </div>
+                            </ul>
+                        </li>
+                    {{/each}}
+                </ol>
+            </div>
+        </script>
+    
+    </main>
 
     <footer>
         <div class="footer-container">

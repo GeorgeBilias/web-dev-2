@@ -27,36 +27,40 @@
         
     </header>
 
-    <div id="listings-container"></div>
+    <main>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-    <script src="cat.js"></script>
+        <div id="listings-container"></div>
 
-    <script id="listing-template" type="text/x-handlebars-template">
-        <div class="listings"></div>
-            <ol class="grid">
-                {{#each listings}}
-                    <li class="listing">
-                        <h3>{{title}}</h3>
-                        <ul>
-                            <li>
-                                <ul>
-                                    <li class="img">
-                                        <img src="https://wiki-ads.onrender.com/{{images.[0]}}" alt="" height="200px">
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>{{description}}</li>
-                            <div class="cost">
-                                <li class="cost">{{cost}} €</li>
-                            </div>
-                        </ul>
-                    </li>
-                {{/each}}
-            </ol>
-        </div>
-    </script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+        <script src="cat.js"></script>
+
+        <script id="listing-template" type="text/x-handlebars-template">
+            <div class="listings"></div>
+                <ol class="grid">
+                    {{#each listings}}
+                        <li class="listing">
+                            <h3>{{title}}</h3>
+                            <ul>
+                                <li>
+                                    <ul>
+                                        <li class="img">
+                                            <img src="https://wiki-ads.onrender.com/{{images.[0]}}" alt="" height="200px">
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>{{description}}</li>
+                                <div class="cost">
+                                    <li class="cost">{{cost}} €</li>
+                                </div>
+                            </ul>
+                        </li>
+                    {{/each}}
+                </ol>
+            </div>
+        </script>
+    
+    </main>
 
     <footer>
         <div class="footer-container">
