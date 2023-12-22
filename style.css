@@ -370,6 +370,35 @@ aside {
   gap: 20px;
 }
 
+form#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 20px;
+}
+
+form#loginForm input {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px; /* Adjust the width as needed */
+}
+
+form#loginForm button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
+form#loginForm button:hover {
+  background-color: #555;
+}
+
+
 
 
  /* Mobile phones */

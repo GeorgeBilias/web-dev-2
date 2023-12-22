@@ -11,12 +11,11 @@ app.use(cors());
 
 // Add the following middleware to enable CORS
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'OPTIONS, POST');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
     res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:3000'); // Update with your frontend origin
-
+    res.header(`Access-Control-Allow-Origin`, `example.com`);
+    res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
+    res.header(`Access-Control-Allow-Headers`, `Content-Type`);
     console.log("here 1")
 
 
