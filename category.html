@@ -64,12 +64,19 @@
                                 <div class="cost">
                                     <li class="cost">{{cost}} €</li>
                                 </div>
+                                <li>
+                                    <!-- Add a heart icon for favoriting -->
+                                    <button class="heart" data-listing-id="{{id}}" onclick="toggleImage()"></button>
+                                </li>
                             </ul>
                         </li>
                     {{/each}}
                 </ol>
             </div>
         </script>
+
+        <!-- Additional script for handling favorites -->
+        <script src="favorites.js"></script>
     
     </main>
 

@@ -557,3 +557,14 @@ form#loginForm button:hover {
     } 
     
   }
+
+/* Add a background image to the button */
+.heart {
+  width: 30px; /* Set the width of the button */
+  height: 30px; /* Set the height of the button */
+  background-image: url(photos/heart.png);
+  background-color: transparent;
+  background-size: cover; /* Adjust the background size */
+  border: none; /* Remove the button border */
+  cursor: pointer; /* Add a pointer cursor for interaction */
+}
