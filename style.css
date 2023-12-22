@@ -562,7 +562,6 @@ form#loginForm button:hover {
 .heart {
   width: 30px; /* Set the width of the button */
   height: 30px; /* Set the height of the button */
-  background-image: url(photos/heart.png);
   background-color: transparent;
   background-size: cover; /* Adjust the background size */
   border: none; /* Remove the button border */
