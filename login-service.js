@@ -24,12 +24,19 @@ app.use((req, res, next) => {
     next();
 });
 
+// A map to store session IDs and usernames
+const sessions = new Map();
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    // Check username and password (this is a basic example, replace with your authentication logic)
+    // Check username and password
     if (username === 'Ryan' && password === 'Gosling') {
         const sessionId = uuidv4();
+
+        // Store the session ID and username
+        sessions.set(sessionId, username);
+
         res.json({ sessionId });
         console.log("succesfull login")
     } else {
@@ -40,3 +47,4 @@ app.post('/login', (req, res) => {
 app.listen(port, () => {
     console.log(`Login Service listening at http://localhost:${port}`);
 });
+
