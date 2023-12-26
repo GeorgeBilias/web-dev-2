@@ -38,7 +38,7 @@ app.post('/login', (req, res) => {
         sessions.set(sessionId, username);
 
         res.json({ sessionId });
-        console.log("succesfull login")
+        console.log("succesful login")
     } else {
         res.status(401).json({ message: 'Invalid credentials' });
     }
