@@ -48,3 +48,15 @@ app.listen(port, () => {
     console.log(`Login Service listening at http://localhost:${port}`);
 });
 
+app.post('/toggle-favorite', (req, res) => {
+    const {sessionId } = req.body;
+
+    // Check if the session ID is valid
+    if (sessions.has(sessionId)) {
+        console.log('User is logged in');
+        res.sendStatus(200);
+    } else {
+        res.status(401).json({ message: 'Invalid session ID' });
+    }
+});
+

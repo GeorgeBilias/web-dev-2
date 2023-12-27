@@ -569,6 +569,12 @@ form#loginForm button:hover {
   cursor: pointer; /* Add a pointer cursor for interaction */
 }
 
-.heart .favorited{
+.heart-favorite{
+  width: 30px; /* Set the width of the button */
+  height: 30px; /* Set the height of the button */
+  background-color: transparent;
+  background-size: cover; /* Adjust the background size */
+  border: none; /* Remove the button border */
+  cursor: pointer; /* Add a pointer cursor for interaction */
   background-image: url("photos/red-heart.png");
 }
