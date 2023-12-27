@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Error fetching listings:", error));
 });
 
+
+
 sessionId = null;
 
 async function login() {
@@ -57,6 +59,8 @@ async function login() {
             document.getElementById('message').innerText = `Login successful. Session ID: ${result.sessionId}`;
             console.log(result.sessionId)
             sessionId = result.sessionId;
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('logout-button').style.display = 'block';
         } else if (response.status === 401) {
             // Unauthorized (incorrect credentials)
             document.getElementById('message').innerText = 'Invalid credentials. Please try again.';
@@ -89,9 +93,13 @@ function toggleFavorite(id) {
         })
             .then(response => {
                 if (response.ok) {
-                    console.log('Toggled favorite successfully');
-                    // Toggle the heart icon here
-                    heartButton.className = 'heart-favorite';
+                    if (heartButton.className === 'heart-favorite') {
+                        console.log('Toggled unfavorite successfully');
+                        heartButton.className = 'heart';
+                    }else{
+                        console.log('Toggled favorite successfully');
+                        heartButton.className = 'heart-favorite';
+                    }
                 } else {
                     console.error('Failed to toggle favorite');
                 }
@@ -115,18 +123,4 @@ function isLoggedIn() {
 function getLoggedInUserSession() {
     
     return sessionId;    
-}
-
-// useless now   
-function toggleImage(id) {
-const button = document.getElementById(id);
-
-// Toggle between two images based on the current background image
-if (button.style.backgroundImage == 'url("photos/red-heart.png")') {
-    button.style.backgroundImage = 'url("photos/heart.png")';
-} else {
-    button.style.backgroundImage = 'url("photos/red-heart.png")';
-}
-
-
 }

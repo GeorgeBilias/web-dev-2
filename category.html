@@ -25,11 +25,16 @@
         </nav>    
         </div>
 
-        <form id="loginForm">
-            <input type="text" id="username" name="username" placeholder="Username">
-            <input type="password" id="password" name="password" placeholder="Password">
-            <button type="button" onclick="login()">Login</button>
-        </form>
+        
+            <form id="loginForm">
+                <div id="login-section">
+                    <input type="text" id="username" name="username" placeholder="Username">
+                    <input type="password" id="password" name="password" placeholder="Password">
+                    <button type="button" onclick="login()">Login</button>
+                </div>
+                <button id="logout-button" style="display: none">Logout</button>
+            </form>
+        
         
     </header>
 
