@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Error fetching listings:", error));
 });
 
+sessionId = null;
+
 async function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -54,6 +56,7 @@ async function login() {
             // Successful authentication
             document.getElementById('message').innerText = `Login successful. Session ID: ${result.sessionId}`;
             console.log(result.sessionId)
+            sessionId = result.sessionId;
         } else if (response.status === 401) {
             // Unauthorized (incorrect credentials)
             document.getElementById('message').innerText = 'Invalid credentials. Please try again.';
@@ -67,3 +70,63 @@ async function login() {
     }
 }
 
+function toggleFavorite(id) {
+    const heartButton = document.getElementById(id);
+
+    if (isLoggedIn()) {
+        console.log('User is logged in');
+        // Call the Add to Favorites Service (AFS) with necessary data
+        fetch('http://localhost:3000/toggle-favorite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                listingId: id,
+                username: username,
+                sessionId: getLoggedInUserSession(),
+            }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Toggled favorite successfully');
+                    // Toggle the heart icon here
+                    heartButton.className = 'heart-favorite';
+                } else {
+                    console.error('Failed to toggle favorite');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    } else {
+        alert('Please log in to add to favorites');
+    }
+}
+
+function isLoggedIn() {
+    // Check if the user is logged in
+    // Get the sessionId from localStorage
+    
+    console.log(sessionId);
+    console.log(sessionId !== null);
+
+    return sessionId !== null;
+}
+
+function getLoggedInUserSession() {
+    
+    return sessionId;    
+}
+
+// useless now   
+function toggleImage(id) {
+const button = document.getElementById(id);
+
+// Toggle between two images based on the current background image
+if (button.style.backgroundImage == 'url("photos/red-heart.png")') {
+    button.style.backgroundImage = 'url("photos/heart.png")';
+} else {
+    button.style.backgroundImage = 'url("photos/red-heart.png")';
+}
+
+
+}
