@@ -49,14 +49,14 @@
         <div id="message" style="position: fixed; top: 50px; right: 10px;"></div>
         
 
-        <div id="listings-container"></div>
+        <div id="listings-container">
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
         <script src="cat.js"></script>
 
         <script id="listing-template" type="text/x-handlebars-template">
-            <div class="listings"></div>
+            <div class="listings">
                 <ol class="grid">
                     {{#each listings}}
                         <li class="listing">
@@ -75,7 +75,7 @@
                                 </div>
                                 <li>
                                     <!-- Add a heart icon for favoriting -->
-                                    <button class="heart" id="{{id}}" onclick="toggleFavorite('{{id}}','{{title}}','{{description}}','{{cost}}')"></button>
+                                    <button class="heart" id="{{id}}" onclick="toggleFavorite('{{id}}', '{{title}}', '{{description}}', '{{cost}}')"></button>
                                 </li>
                             </ul>
                         </li>
@@ -83,6 +83,8 @@
                 </ol>
             </div>
         </script>
+
+    </div>
     
     </main>
 
