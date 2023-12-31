@@ -54,12 +54,15 @@ app.listen(port, () => {
 });
 
 app.post('/toggle-favorite', (req, res) => {
-    const { sessionId, listingId } = req.body;
+    const { sessionId, listingId,title,description,cost } = req.body;
 
     // Check if the session ID is valid
     if (sessions.has(sessionId)) {
         const username = sessions.get(sessionId);
 
+        console.log(description);
+        console.log(cost);
+        console.log(title);
         // Update the user's favorite ads list
         users[username].favorites.includes(listingId)
             ? users[username].favorites.splice(users[username].favorites.indexOf(listingId), 1)

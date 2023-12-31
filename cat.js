@@ -98,7 +98,7 @@ async function fetchUserFavorites() {
     }
 }
 
-function toggleFavorite(id) {
+function toggleFavorite(id,title,description,cost) {
     const heartButton = document.getElementById(id);
 
     if (isLoggedIn()) {
@@ -112,6 +112,9 @@ function toggleFavorite(id) {
             body: JSON.stringify({
                 sessionId: sessionId,
                 listingId: id,
+                title: title,
+                description: description,
+                cost: cost,
             }),
         })
             .then(response => {
