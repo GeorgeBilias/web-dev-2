@@ -129,7 +129,7 @@ function toggleFavorite(id) {
             })
             .catch(error => console.error('Error:', error));
     } else {
-        alert('Please log in to add to favorites');
+        alert('Παρακαλώ συνδεθείτε για προσθήκη στη λίστα αγαπημένων');
     }
 }
 
