@@ -108,3 +108,16 @@ app.post('/get-favorites', (req, res) => {
         res.status(401).json({ message: 'Invalid session ID' });
     }
 });
+
+app.post('/logout', (req, res) => {
+    const { sessionId } = req.body;
+
+    // Check if the session ID is valid
+    if (sessions.has(sessionId)) {
+        // Remove the session
+        sessions.delete(sessionId);
+        res.sendStatus(200);
+    } else {
+        res.status(401).json({ message: 'Invalid session ID' });
+    }
+});

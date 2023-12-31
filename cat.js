@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-sessionId = null;
 
 async function login() {
     const username = document.getElementById('username').value;
@@ -69,6 +68,7 @@ async function login() {
             document.getElementById('message').innerText = `Login successful. Session ID: ${result.sessionId}`;
             console.log("Session id from login service :"+result.sessionId);
             sessionId = result.sessionId;
+            sessionStorage.setItem('sessionId', sessionId);
 
             // Display the contents of the user's favorite ads list
             fetchUserFavorites();
@@ -90,7 +90,8 @@ async function login() {
 }
 
 async function fetchUserFavorites() {
-    if (isLoggedIn()) {
+    const sessionId = sessionStorage.getItem('sessionId');
+    if (isLoggedIn(sessionId)) {
         const response = await fetch('http://localhost:3000/get-favorites', {
             method: 'POST',
             headers: {
@@ -113,7 +114,9 @@ async function fetchUserFavorites() {
 function toggleFavorite(id,title,description,cost) {
     const heartButton = document.getElementById(id);
 
-    if (isLoggedIn()) {
+    sessionId = sessionStorage.getItem('sessionId');
+
+    if (isLoggedIn(sessionId)) {
         console.log('User is logged in');
         // Call the Add to Favorites Service (AFS) with necessary data
         fetch('http://localhost:3000/toggle-favorite', {
@@ -148,7 +151,7 @@ function toggleFavorite(id,title,description,cost) {
     }
 }
 
-function isLoggedIn() {
+function isLoggedIn(sessionId) {
     // Check if the user is logged in
     // Get the sessionId from localStorage
     
@@ -158,17 +161,54 @@ function isLoggedIn() {
     return sessionId !== null;
 }
 
-function getLoggedInUserSession() {
+function getLoggedInUserSession(sessionId) {
     
     return sessionId;    
 }
 
 function favorites_button() {
     console.log("Favorites button clicked");
-    sessionId = getLoggedInUserSession();
+    sessionId = sessionStorage.getItem('sessionId');
+    sessionId = getLoggedInUserSession(sessionId);
     console.log("Session id from favorites button :"+sessionId)
     username = document.getElementById('username').value;
     console.log("Username from favorites button :"+username)
     window.location.href = `favorites.html?username=${username}&sessionId=${sessionId}`;
     window.location.href
+}
+
+function logout() {
+    fetch('http://localhost:3000/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            sessionId: sessionStorage.getItem('sessionId'),
+        }),
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Logged out successfully');
+                window.location.href = 'index.html';
+            } else {
+                console.error('Failed to log out');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    sessionStorage.removeItem('sessionId');
+    console.log(window.location);
+}
+
+window.onload = function() {
+    const isLoggedIn = sessionStorage.getItem('sessionId') !== null;
+    if (isLoggedIn) {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('logout-button').style.display = 'block';
+        document.getElementById('favorites-button').style.display = 'block';
+    } else {
+        document.getElementById('login-section').style.display = 'block';
+        document.getElementById('logout-button').style.display = 'none';
+        document.getElementById('favorites-button').style.display = 'none';
+    }
 }
