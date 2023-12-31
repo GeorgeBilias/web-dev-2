@@ -54,7 +54,7 @@ app.listen(port, () => {
 });
 
 app.post('/toggle-favorite', (req, res) => {
-    const { sessionId, listingId,title,description,cost } = req.body;
+    const { sessionId, listingId, title, description, cost } = req.body;
 
     // Check if the session ID is valid
     if (sessions.has(sessionId)) {
@@ -63,10 +63,27 @@ app.post('/toggle-favorite', (req, res) => {
         console.log(description);
         console.log(cost);
         console.log(title);
-        // Update the user's favorite ads list
-        users[username].favorites.includes(listingId)
-            ? users[username].favorites.splice(users[username].favorites.indexOf(listingId), 1)
-            : users[username].favorites.push(listingId);
+
+        // Create an object with the listing details
+        const listingDetails = {
+            listingId,
+            title,
+            description,
+            cost
+        };
+
+        // Check if the user already has the listing in favorites
+        const index = users[username].favorites.findIndex(item => item.listingId === listingId);
+
+        if (index !== -1) {
+            // If found, remove it from favorites
+            users[username].favorites.splice(index, 1);
+            console.log('Removed from favorites:', listingDetails);
+        } else {
+            // If not found, add it to favorites
+            users[username].favorites.push(listingDetails);
+            console.log('Added to favorites:', listingDetails);
+        }
 
         console.log('Updated favorites:', users[username].favorites);
         res.sendStatus(200);
@@ -74,6 +91,7 @@ app.post('/toggle-favorite', (req, res) => {
         res.status(401).json({ message: 'Invalid session ID' });
     }
 });
+
 
 // Add this new endpoint to login-service.js
 app.post('/get-favorites', (req, res) => {
