@@ -39,16 +39,14 @@ async function login() {
     console.log(username, password);
 
     try {
-        const token = sessionStorage.getItem('token')
-
+        const token = sessionStorage.getItem('token');
 
         const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
             },
-
             body: JSON.stringify({ username, password }),
         });
 
@@ -57,20 +55,46 @@ async function login() {
         if (response.ok) {
             // Successful authentication
             document.getElementById('message').innerText = `Login successful. Session ID: ${result.sessionId}`;
-            console.log(result.sessionId)
+            console.log("Session id from login service :"+result.sessionId);
             sessionId = result.sessionId;
+
+            // Display the contents of the user's favorite ads list
+            fetchUserFavorites();
+            
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('logout-button').style.display = 'block';
+            document.getElementById('favorites-button').style.display = 'block';
         } else if (response.status === 401) {
             // Unauthorized (incorrect credentials)
             document.getElementById('message').innerText = 'Invalid credentials. Please try again.';
         } else {
             // Other errors
-            document.getElementById('message').innerText = 'An error occurred during login. Please try again later.';
+            document.getElementById('message').innerText =
+                'An error occurred during login. Please try again later.';
         }
-        
     } catch (error) {
         console.error('Error during login:', error.message);
+    }
+}
+
+async function fetchUserFavorites() {
+    if (isLoggedIn()) {
+        const response = await fetch('http://localhost:3000/get-favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sessionId: sessionId,
+            }),
+        });
+
+        if (response.ok) {
+            const favorites = await response.json();
+            console.log(`User's favorite ads:`, favorites);
+        } else {
+            console.error('Failed to fetch user favorites');
+        }
     }
 }
 
@@ -86,9 +110,8 @@ function toggleFavorite(id) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                sessionId: sessionId,
                 listingId: id,
-                username: username,
-                sessionId: getLoggedInUserSession(),
             }),
         })
             .then(response => {
@@ -96,7 +119,7 @@ function toggleFavorite(id) {
                     if (heartButton.className === 'heart-favorite') {
                         console.log('Toggled unfavorite successfully');
                         heartButton.className = 'heart';
-                    }else{
+                    } else {
                         console.log('Toggled favorite successfully');
                         heartButton.className = 'heart-favorite';
                     }
@@ -123,4 +146,14 @@ function isLoggedIn() {
 function getLoggedInUserSession() {
     
     return sessionId;    
+}
+
+function favorites_button() {
+    console.log("Favorites button clicked");
+    sessionId = getLoggedInUserSession();
+    console.log("Session id from favorites button :"+sessionId)
+    username = document.getElementById('username').value;
+    console.log("Username from favorites button :"+username)
+    window.location.href = `favorites.html?username=${username}&sessionId=${sessionId}`;
+    window.location.href
 }
