@@ -54,12 +54,11 @@ app.listen(port, () => {
 });
 
 app.post('/toggle-favorite', (req, res) => {
-    const { sessionId, listingId, title, description, cost } = req.body;
-
+    const { sessionId, listingId, title, description, cost,image_url } = req.body;
+    
     // Check if the session ID is valid
     if (sessions.has(sessionId)) {
         const username = sessions.get(sessionId);
-
         console.log(description);
         console.log(cost);
         console.log(title);
@@ -69,7 +68,10 @@ app.post('/toggle-favorite', (req, res) => {
             listingId,
             title,
             description,
-            cost
+            cost,
+            image_url,
+            username,
+            sessionId,
         };
 
         // Check if the user already has the listing in favorites
@@ -78,11 +80,11 @@ app.post('/toggle-favorite', (req, res) => {
         if (index !== -1) {
             // If found, remove it from favorites
             users[username].favorites.splice(index, 1);
-            console.log('Removed from favorites:', listingDetails);
+            //console.log('Removed from favorites:', listingDetails);
         } else {
             // If not found, add it to favorites
             users[username].favorites.push(listingDetails);
-            console.log('Added to favorites:', listingDetails);
+            //console.log('Added to favorites:', listingDetails);
         }
 
         console.log('Updated favorites:', users[username].favorites);

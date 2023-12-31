@@ -111,7 +111,7 @@ async function fetchUserFavorites() {
     }
 }
 
-function toggleFavorite(id,title,description,cost) {
+function toggleFavorite(id,title,description,cost,image_url) {
     const heartButton = document.getElementById(id);
 
     sessionId = sessionStorage.getItem('sessionId');
@@ -130,6 +130,7 @@ function toggleFavorite(id,title,description,cost) {
                 title: title,
                 description: description,
                 cost: cost,
+                image_url: image_url,
             }),
         })
             .then(response => {
