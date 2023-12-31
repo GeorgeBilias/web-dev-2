@@ -13,6 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetchListings(categoryId)
         .then(listings => {
+
+            // Replace the /' in description with \'
+            listings.forEach(listing => {
+                listing.description = listing.description.replace(/\/'/g, "\\'");
+            });
+
+            Handlebars.registerHelper('unescapeBackslashes', function(text) {
+                return new Handlebars.SafeString(text.replace(/\\'/g, "'"));
+            });
+            
+
             // Get the Handlebars template script
             const templateSource = document.getElementById("listing-template").innerHTML;
             
@@ -24,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
             // Insert the rendered HTML into the container
             listingsContainer.innerHTML = html;
+
         })
         .catch(error => console.error("Error fetching listings:", error));
 });
