@@ -79,6 +79,7 @@ async function login() {
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('logout-button').style.display = 'block';
             document.getElementById('favorites-button').style.display = 'block';
+            window.location.reload();
         } else if (response.status === 401) {
             // Unauthorized (incorrect credentials)
             document.getElementById('message').innerText = 'Invalid credentials. Please try again.';
