@@ -35,3 +35,26 @@ async function getFavorites() {
     }
 }
 });
+
+function deleteFavorite(listingId) {
+    const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
+    const username = sessionStorage.getItem('username'); // Get username from sessionStorage
+    fetch('http://localhost:3000/delete-favorite', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            listingId: listingId,
+            username: username,
+            sessionId: sessionId,
+        }),
+    }).then((response) => {
+        if (response.ok) {
+            console.log('Successfully deleted favorite');
+            window.location.reload();
+        } else {
+            console.error('Failed to delete favorite');
+        }
+    });
+}

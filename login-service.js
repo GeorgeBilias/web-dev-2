@@ -125,3 +125,26 @@ app.post('/logout', (req, res) => {
         res.status(401).json({ message: 'Invalid session ID' });
     }
 });
+
+app.post('/delete-favorite', (req, res) => {
+    const { sessionId, listingId } = req.body;
+
+    // Check if the session ID is valid
+    if (sessions.has(sessionId)) {
+        const username = sessions.get(sessionId);
+
+        // Find the listing in favorites
+        const index = users[username].favorites.findIndex(item => item.listingId === listingId);
+
+        if (index !== -1) {
+            // If found, remove it from favorites
+            users[username].favorites.splice(index, 1);
+            console.log('Removed from favorites:', listingId);
+            res.sendStatus(200);
+        } else {
+            res.status(401).json({ message: 'Invalid listing ID' });
+        }
+    } else {
+        res.status(401).json({ message: 'Invalid session ID' });
+    }
+});
