@@ -97,8 +97,8 @@ app.post('/toggle-favorite', (req, res) => {
 
 // Add this new endpoint to login-service.js
 app.post('/get-favorites', (req, res) => {
-    const { sessionId } = req.body;
-
+    const { username,sessionId } = req.body;
+    console.log("username :"+username);
     // Check if the session ID is valid
     if (sessions.has(sessionId)) {
         const username = sessions.get(sessionId);

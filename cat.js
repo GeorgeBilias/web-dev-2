@@ -69,6 +69,7 @@ async function login() {
             console.log("Session id from login service :"+result.sessionId);
             sessionId = result.sessionId;
             sessionStorage.setItem('sessionId', sessionId);
+            sessionStorage.setItem('username', username);
 
             // Display the contents of the user's favorite ads list
             fetchUserFavorites();

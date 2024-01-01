@@ -1,11 +1,13 @@
 async function getFavorites() {
     const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
+    const username = sessionStorage.getItem('username'); // Get username from sessionStorage
     const response = await fetch('http://localhost:3000/get-favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                username: username,
                 sessionId: sessionId,
             }),
         });
