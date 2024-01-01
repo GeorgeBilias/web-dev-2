@@ -102,8 +102,10 @@ app.post('/get-favorites', (req, res) => {
     // Check if the session ID is valid
     if (sessions.has(sessionId)) {
         const username = sessions.get(sessionId);
-        console.log("username :"+username);
-
+        if (!users[username]) {
+            res.status(401).json({ message: 'Invalid username' });
+            return;
+        }
         // Return the user's favorite ads
         res.json(users[username].favorites);
     } else {
