@@ -101,8 +101,8 @@ app.post('/get-favorites', (req, res) => {
     console.log("username :"+username);
     // Check if the session ID is valid
     if (sessions.has(sessionId)) {
-        const username = sessions.get(sessionId);
-        if (!users[username]) {
+        const username_session = sessions.get(sessionId);
+        if (username_session !== username) {
             res.status(401).json({ message: 'Invalid username' });
             return;
         }
