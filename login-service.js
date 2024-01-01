@@ -113,6 +113,23 @@ app.post('/get-favorites', (req, res) => {
     }
 });
 
+app.post('/check-favorites', (req, res) => {
+    const { username,sessionId } = req.body;
+    console.log("username :"+username);
+    // Check if the session ID is valid
+    if (sessions.has(sessionId)) {
+        const username_session = sessions.get(sessionId);
+        if (username_session !== username) {
+            res.status(401).json({ message: 'Invalid username' });
+            return;
+        }
+        // Return the user's favorite ads
+        res.json(users[username].favorites);
+    } else {
+        res.status(401).json({ message: 'No favourites found' });
+    }
+});
+
 app.post('/logout', (req, res) => {
     const { sessionId } = req.body;
 

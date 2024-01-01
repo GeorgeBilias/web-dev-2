@@ -58,3 +58,17 @@ function deleteFavorite(listingId) {
         }
     });
 }
+
+window.onload = function() {
+    const isLoggedIn = sessionStorage.getItem('sessionId') !== null;
+    if (isLoggedIn) {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('logout-button').style.display = 'block';
+        document.getElementById('favorites-button').style.display = 'block';
+        
+    } else {
+        document.getElementById('login-section').style.display = 'block';
+        document.getElementById('logout-button').style.display = 'none';
+        document.getElementById('favorites-button').style.display = 'none';
+    }
+}

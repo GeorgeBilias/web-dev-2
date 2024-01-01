@@ -36,6 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
             // Insert the rendered HTML into the container
             listingsContainer.innerHTML = html;
 
+            // Set the heart buttons as favorites if they are in the user's favorites list
+            if(sessionStorage.getItem('sessionId') !== null) {
+            getFavorites();
+            }
+
         })
         .catch(error => console.error("Error fetching listings:", error));
 });
@@ -70,9 +75,6 @@ async function login() {
             sessionId = result.sessionId;
             sessionStorage.setItem('sessionId', sessionId);
             sessionStorage.setItem('username', username);
-
-            // Display the contents of the user's favorite ads list
-            fetchUserFavorites();
             
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('logout-button').style.display = 'block';
@@ -87,28 +89,6 @@ async function login() {
         }
     } catch (error) {
         console.error('Error during login:', error.message);
-    }
-}
-
-async function fetchUserFavorites() {
-    const sessionId = sessionStorage.getItem('sessionId');
-    if (isLoggedIn(sessionId)) {
-        const response = await fetch('http://localhost:3000/get-favorites', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                sessionId: sessionId,
-            }),
-        });
-
-        if (response.ok) {
-            const favorites = await response.json();
-            console.log(`User's favorite ads:`, favorites);
-        } else {
-            console.error('Failed to fetch user favorites');
-        }
     }
 }
 
@@ -202,12 +182,41 @@ function logout() {
     console.log(window.location);
 }
 
+async function getFavorites() {
+    const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
+    const username = sessionStorage.getItem('username'); // Get username from sessionStorage
+    const response = await fetch('http://localhost:3000/check-favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                sessionId: sessionId,
+            }),
+        });
+    if (response.ok) {
+        const listings = await response.json();
+        console.log(`User's favorite ads:`, listings);
+        listings.forEach(listing => {
+            if (document.getElementById(listing.listingId) !== null) {
+                const heartButton = document.getElementById(listing.listingId);
+                heartButton.className = 'heart-favorite';
+            }
+        });
+    }else{
+        console.error('Failed to fetch user favorites');
+    }
+}
+
+
 window.onload = function() {
     const isLoggedIn = sessionStorage.getItem('sessionId') !== null;
     if (isLoggedIn) {
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('logout-button').style.display = 'block';
         document.getElementById('favorites-button').style.display = 'block';
+        
     } else {
         document.getElementById('login-section').style.display = 'block';
         document.getElementById('logout-button').style.display = 'none';
