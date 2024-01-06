@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     getFavorites();
+});
+
 async function getFavorites() {
-    const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
-    const username = sessionStorage.getItem('username'); // Get username from sessionStorage
-    const response = await fetch('http://localhost:3000/get-favorites', {
+    try {
+        const sessionId = sessionStorage.getItem('sessionId');
+        const username = sessionStorage.getItem('username');
+        const response = await fetch('http://localhost:3000/get-favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -13,28 +16,25 @@ async function getFavorites() {
                 sessionId: sessionId,
             }),
         });
-    if (response.ok) {
-        const listings = await response.json();
-        console.log(`User's favorite ads:`, listings);
-        const listingsContainer = document.getElementById("listings-container");
-        // Get the template from the HTML document
-        const source = document.getElementById('listing-template').innerHTML;
 
-        // Compile the template
-        const template = Handlebars.compile(source);
+        if (response.ok) {
+            const listings = await response.json();
+            console.log(`User's favorite ads:`, listings);
 
-        
-        // Generate the HTML for this ad using the template
-        const html = template({listings: listings});
+            const listingsContainer = document.getElementById("listings-container");
+            const listingTemplate = document.getElementById('listing-template');
 
-        // Append the generated HTML to the favList
-        listingsContainer.innerHTML = html;
-
-    } else {
-        console.error('Failed to fetch user favorites');
+            if (listingsContainer && listingTemplate && listings.length > 0) {
+                const source = listingTemplate.textContent;
+                const template = Handlebars.compile(source);
+                const html = template({listings: listings});
+                listingsContainer.innerHTML = html;
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
 }
-});
 
 function deleteFavorite(listingId) {
     const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
