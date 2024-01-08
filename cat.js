@@ -93,10 +93,15 @@ function generateSubcategoriesMenu(subcategories, currentSubcategory) {
 
     return `
         <div class="subcategory-menu">
+            <label class="subcategory-label">
+                <input type="radio" name="subcategory" value="" ${!currentSubcategory ? 'checked' : ''}>
+                'Oλα
+            </label>
             ${menu}
         </div>
     `;
 }
+
 
 
 
