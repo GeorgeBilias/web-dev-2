@@ -610,3 +610,25 @@ form#loginForm button:hover {
   cursor: pointer; /* Add a pointer cursor for interaction */
   background-image: url("photos/red-heart.png");
 }
+
+/* style the subcategories container */
+
+.subcategory-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.subcategory-label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.subcategory-label input {
+  margin-right: 5px;
+}

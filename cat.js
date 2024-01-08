@@ -1,49 +1,102 @@
 document.addEventListener("DOMContentLoaded", function () {
     const listingsContainer = document.getElementById("listings-container");
-
-    function fetchListings(categoryId) {
-        return fetch(`https://wiki-ads.onrender.com/ads?category=${categoryId}`)
-            .then(response => response.json());
-    }
+    const subcategoriesMenuContainer = document.getElementById('subcategories-container');
 
     const urlParams = new URLSearchParams(window.location.search);
     const categoryId = urlParams.get('id');
+    const subcategoryId = urlParams.get('subcategory');
 
-    console.log(categoryId)
-
-    fetchListings(categoryId)
-        .then(listings => {
-
-            // Replace the /' in description with \'
-            listings.forEach(listing => {
-                listing.description = listing.description.replace(/\/'/g, "\\'");
+    function fetchListings(categoryId, subcategoryId) {
+        const url = subcategoryId ? `https://wiki-ads.onrender.com/ads?category=${categoryId}&subcategory=${subcategoryId}` : `https://wiki-ads.onrender.com/ads?category=${categoryId}`;
+        return fetch(url)
+            .then(response => response.json())
+            .then(listings => {
+                // Filter listings based on subcategoryId
+                if (subcategoryId) {
+                    listings = listings.filter(listing => listing.subcategory_id == subcategoryId);
+                }
+                return listings;
             });
+    }
 
-            Handlebars.registerHelper('unescapeBackslashes', function(text) {
-                return new Handlebars.SafeString(text.replace(/\\'/g, "'"));
-            });
-            
+    function fetchSubcategories(categoryId) {
+        const url = `https://wiki-ads.onrender.com/categories/${categoryId}/subcategories`;
+        return fetch(url).then(response => response.json());
+    }
 
-            // Get the Handlebars template script
-            const templateSource = document.getElementById("listing-template").innerHTML;
-            
-            // Compile the Handlebars template
-            const template = Handlebars.compile(templateSource);
-            
-            // Render the listings using the template
-            const html = template({ listings: listings });
-            
-            // Insert the rendered HTML into the container
-            listingsContainer.innerHTML = html;
+    console.log(categoryId);
 
-            // Set the heart buttons as favorites if they are in the user's favorites list
-            if(sessionStorage.getItem('sessionId') !== null) {
+    // Fetch both listings and subcategories concurrently
+    Promise.all([
+        fetchListings(categoryId, subcategoryId),
+        fetchSubcategories(categoryId)
+    ])
+    .then(([listings, subcategories]) => {
+        // Replace the /' in description with \'
+        listings.forEach(listing => {
+            listing.description = listing.description.replace(/\/'/g, "\\'");
+        });
+
+        Handlebars.registerHelper('unescapeBackslashes', function (text) {
+            return new Handlebars.SafeString(text.replace(/\\'/g, "'"));
+        });
+
+        // Get the Handlebars template script
+        const templateSource = document.getElementById("listing-template").innerHTML;
+
+        // Compile the Handlebars template
+        const template = Handlebars.compile(templateSource);
+
+        // Render the listings using the template
+        const html = template({ listings: listings });
+
+        // Insert the rendered HTML into the container
+        listingsContainer.innerHTML = html;
+
+        // Set the heart buttons as favorites if they are in the user's favorites list
+        if (sessionStorage.getItem('sessionId') !== null) {
             getFavorites();
-            }
+        }
 
-        })
-        .catch(error => console.error("Error fetching listings:", error));
+        // Render the subcategories menu for the selected category
+        subcategoriesMenuContainer.innerHTML = generateSubcategoriesMenu(subcategories, subcategoryId);
+
+        // Add event listener to subcategories menu
+        subcategoriesMenuContainer.addEventListener('change', function (event) {
+            const selectedSubcategory = event.target.value;
+            fetchListings(categoryId, selectedSubcategory)
+                .then(newListings => {
+                    // Render the new listings using the template
+                    const html = template({ listings: newListings });
+
+                    // Update the listings container with the new HTML content
+                    listingsContainer.innerHTML = html;
+
+                    // Set the heart buttons as favorites if they are in the user's favorites list
+                    if (sessionStorage.getItem('sessionId') !== null) {
+                        getFavorites();
+                    }
+                })
+                .catch(error => console.error("Error fetching listings for subcategory:", error));
+        });
+    })
+    .catch(error => console.error("Error fetching data:", error));
 });
+
+function generateSubcategoriesMenu(subcategories, currentSubcategory) {
+    const menu = subcategories.map(subcategory => `
+        <label class="subcategory-label">
+            <input type="radio" name="subcategory" value="${subcategory.id}" ${subcategory.id === currentSubcategory ? 'checked' : ''}>
+            ${subcategory.title}
+        </label>
+    `).join('');
+
+    return `
+        <div class="subcategory-menu">
+            ${menu}
+        </div>
+    `;
+}
 
 
 
@@ -92,6 +145,7 @@ async function login() {
         console.error('Error during login:', error.message);
     }
 }
+
 
 function toggleFavorite(id,title,description,cost,image_url) {
     const heartButton = document.getElementById(id);
