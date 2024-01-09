@@ -14,3 +14,9 @@ PASSWORD: password4
 
 USERNAME: user5
 PASSWORD: password5
+
+USERNAME: user6
+PASSWORD: password6
+
+USERNAME: user7
+PASSWORD: password7
