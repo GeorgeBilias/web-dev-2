@@ -116,7 +116,7 @@ function register() {
             document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'hidden';
             alert('Επιτυχής εγγραφή. Παρακαλώ συνδεθείτε.');
             return { message: 'Registration successful' };
-        } else {
+        } else if (response.status === 400) {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             document.getElementById('username').style.border = '1px solid red';
@@ -128,7 +128,32 @@ function register() {
             alert('Το όνομα χρήστη υπάρχει ήδη. Παρακαλώ επιλέξτε άλλο όνομα χρήστη.')
             //RED BORDER TO INPUT FIELD
             return response.json();
+        } else if (response.status === 401) {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '1px solid red';
+            document.getElementById('password').style.border = '1px solid red';
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
+            alert('Username must be at least 3 characters long and not start with a number.')
+            //RED BORDER TO INPUT FIELD
+            return response.json();
+        } else if (response.status === 402) {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '1px solid red';
+            document.getElementById('password').style.border = '1px solid red';
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
+            alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number.')
+            //RED BORDER TO INPUT FIELD
+            return response.json();
         }
+
     })
     .then(data => {
         // Handle the response from the server

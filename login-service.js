@@ -69,6 +69,15 @@ app.post('/register', async (req, res) => {
     if (existingUser) {
         return res.status(400).json({ message: 'Username already exists' });
     }
+    // check if the username is valid
+    if (username.length < 3 || /^\d/.test(username)) {
+        return res.status(401).json({ message: 'Username must be at least 3 characters long and not start with a number.' });
+    }
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    // check if the password is valid
+    if (!regex.test(password)) {
+        return res.status(402).json({ message: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number.' });
+    }
 
     // Insert the new user into the collection
     await collection.insertOne({
