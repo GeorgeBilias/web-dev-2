@@ -58,6 +58,29 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Registration endpoint
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+
+    const collection = client.db(dbName).collection("users");
+
+    // Check if the username already exists
+    const existingUser = await collection.findOne({ username: username });
+    if (existingUser) {
+        return res.status(400).json({ message: 'Username already exists' });
+    }
+
+    // Insert the new user into the collection
+    await collection.insertOne({
+        username: username,
+        password: password,
+        favorites: []
+    });
+
+    res.sendStatus(200);
+});
+
+
 // Toggle favorite endpoint
 app.post('/toggle-favorite', async (req, res) => {
     const { sessionId, listingId, title, description, cost, image_url } = req.body;

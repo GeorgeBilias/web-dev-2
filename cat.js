@@ -89,9 +89,35 @@ function generateSubcategoriesMenu(subcategories, currentSubcategory) {
     `;
 }
 
+function register() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-
-
+    fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password,
+        }),
+    })
+    .then(response => {
+        if (response.ok) {
+            return { message: 'Registration successful' };
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        // Handle the response from the server
+        console.log(data.message);
+    })
+    .catch(error => {
+        console.error('Error during registration:', error);
+    });
+}
 
 async function login() {
     const username = document.getElementById('username').value;
