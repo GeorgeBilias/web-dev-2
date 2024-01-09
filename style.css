@@ -384,9 +384,8 @@ form#loginForm input {
   border-radius: 5px;
   width: 200px; /* Adjust the width as needed */
 }
-.form-control label{ /* style each form label */
-  display: inline-block;
-  margin-bottom: 5px;
+.form-control {
+  position: relative;
 }
 .form-control input{  /* style each input box for a better border */
   border: 1px solid black;
@@ -398,17 +397,15 @@ form#loginForm input {
   visibility: hidden;
   position: absolute;
   right: 10px;
-  top: 33px;
+  top: 10px;
 }
 
 form#loginForm i.fa-exclamation-circle {
   color: red;
-  margin-left: 5px;
   visibility: hidden;
 }
 form#loginForm i.fa-check-circle {
   color: green;
-  margin-left: 5px;
   visibility: hidden;
 }
 

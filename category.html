@@ -30,18 +30,19 @@
         
             <form id="loginForm">
                 <div id="login-section">
-                    <div id="form-control">
+                    <div id="form-control" class="form-control">
                         <input type="text" id="username" name="username" placeholder="Username">
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                    <div id="form-control">                     
+                      </div>
+                      <div id="form-control" class="form-control">
                         <input type="password" id="password" name="password" placeholder="Password">
                         <i class="fas fa-check-circle"></i>
                         <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                    <button type="button" onclick="login()">Login</button>
-                    <button type="button" onclick="register()">Register</button>
+                      </div>    
+                        <button type="button" onclick="register()">Register</button>
+                        <button type="button" onclick="login()">Login</button>
+                    </div> 
                 </div>
                 <button id="logout-button" style="display: none" onclick="logout()">Logout</button>
             </form>
