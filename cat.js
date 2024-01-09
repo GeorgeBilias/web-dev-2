@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Set the heart buttons as favorites if they are in the user's favorites list
         if (sessionStorage.getItem('sessionId') !== null) {
-            getFavorites();
+            checkFavorites();
         }
 
         // Render the subcategories menu for the selected category
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Set the heart buttons as favorites if they are in the user's favorites list
                     if (sessionStorage.getItem('sessionId') !== null) {
-                        getFavorites();
+                        checkFavorites();
                     }
                 })
                 .catch(error => console.error("Error fetching listings for subcategory:", error));
@@ -213,10 +213,9 @@ function favorites_button() {
     sessionId = sessionStorage.getItem('sessionId');
     sessionId = getLoggedInUserSession(sessionId);
     console.log("Session id from favorites button :"+sessionId)
-    username = document.getElementById('username').value;
+    username = sessionStorage.getItem('username');
     console.log("Username from favorites button :"+username)
     window.location.href = `favorites.html?username=${username}&sessionId=${sessionId}`;
-    window.location.href
 }
 
 function logout() {
@@ -242,7 +241,7 @@ function logout() {
     console.log(window.location);
 }
 
-async function getFavorites() {
+async function checkFavorites() {
     const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
     const username = sessionStorage.getItem('username'); // Get username from sessionStorage
     const response = await fetch('http://localhost:3000/check-favorites', {
