@@ -29,3 +29,6 @@ PASSWORD: password9
 
 USERNAME: user10
 PASSWORD: password10
+
+USERNAME: user12
+PASSWORD: Password12
