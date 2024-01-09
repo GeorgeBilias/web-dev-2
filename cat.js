@@ -6,32 +6,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const categoryId = urlParams.get('id');
     const subcategoryId = urlParams.get('subcategory');
 
-    function fetchListings(categoryId, subcategoryId) {
-        const url = subcategoryId ? `https://wiki-ads.onrender.com/ads?category=${categoryId}&subcategory=${subcategoryId}` : `https://wiki-ads.onrender.com/ads?category=${categoryId}`;
-        return fetch(url)
-            .then(response => response.json())
-            .then(listings => {
-                // Filter listings based on subcategoryId
-                if (subcategoryId) {
-                    listings = listings.filter(listing => listing.subcategory_id == subcategoryId);
-                }
-                return listings;
-            });
-    }
-
-    function fetchSubcategories(categoryId) {
-        const url = `https://wiki-ads.onrender.com/categories/${categoryId}/subcategories`;
-        return fetch(url).then(response => response.json());
-    }
-
-    console.log(categoryId);
-
     // Fetch both listings and subcategories concurrently
     Promise.all([
-        fetchListings(categoryId, subcategoryId),
-        fetchSubcategories(categoryId)
+        fetch(`https://wiki-ads.onrender.com/ads?category=${categoryId}`),
+        fetch(`https://wiki-ads.onrender.com/categories/${categoryId}/subcategories`)
     ])
+    .then(([listingsResponse, subcategoriesResponse]) => Promise.all([listingsResponse.json(), subcategoriesResponse.json()]))
     .then(([listings, subcategories]) => {
+        // Filter listings based on subcategoryId
+        if (subcategoryId) {
+            listings = listings.filter(listing => listing.subcategory_id == subcategoryId);
+        }
+
         // Replace the /' in description with \'
         listings.forEach(listing => {
             listing.description = listing.description.replace(/\/'/g, "\\'");
@@ -64,20 +50,21 @@ document.addEventListener("DOMContentLoaded", function () {
         // Add event listener to subcategories menu
         subcategoriesMenuContainer.addEventListener('change', function (event) {
             const selectedSubcategory = event.target.value;
-            fetchListings(categoryId, selectedSubcategory)
-                .then(newListings => {
-                    // Render the new listings using the template
-                    const html = template({ listings: newListings });
+            // Filter listings based on selected subcategory locally
+            const filteredListings = selectedSubcategory ?
+                listings.filter(listing => listing.subcategory_id == selectedSubcategory) :
+                listings;
 
-                    // Update the listings container with the new HTML content
-                    listingsContainer.innerHTML = html;
+            // Render the filtered listings using the template
+            const html = template({ listings: filteredListings });
 
-                    // Set the heart buttons as favorites if they are in the user's favorites list
-                    if (sessionStorage.getItem('sessionId') !== null) {
-                        checkFavorites();
-                    }
-                })
-                .catch(error => console.error("Error fetching listings for subcategory:", error));
+            // Update the listings container with the new HTML content
+            listingsContainer.innerHTML = html;
+
+            // Set the heart buttons as favorites if they are in the user's favorites list
+            if (sessionStorage.getItem('sessionId') !== null) {
+                checkFavorites();
+            }
         });
     })
     .catch(error => console.error("Error fetching data:", error));
