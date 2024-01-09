@@ -105,11 +105,26 @@ function register() {
     })
     .then(response => {
         if (response.ok) {
+            // Registration successful
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '1px solid green';
+            document.getElementById('password').style.border = '1px solid green';
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'hidden';
             alert('Επιτυχής εγγραφή. Παρακαλώ συνδεθείτε.');
             return { message: 'Registration successful' };
         } else {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '1px solid red';
+            document.getElementById('password').style.border = '1px solid red';
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
             alert('Το όνομα χρήστη υπάρχει ήδη. Παρακαλώ επιλέξτε άλλο όνομα χρήστη.')
             //RED BORDER TO INPUT FIELD
             return response.json();
@@ -162,6 +177,13 @@ async function login() {
             // add red border to input fields
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '1px solid red';
+            document.getElementById('password').style.border = '1px solid red';
+            // make the i visible in the input field
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
             alert('Λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά.')
         } else {
             // Other errors
@@ -170,6 +192,13 @@ async function login() {
             // add red border to input fields
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '1px solid red';
+            document.getElementById('password').style.border = '1px solid red';
+            // make the i visible in the input field
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
         }
     } catch (error) {
         console.error('Error during login:', error.message);

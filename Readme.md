@@ -20,3 +20,9 @@ PASSWORD: password6
 
 USERNAME: user7
 PASSWORD: password7
+
+USERNAME: user8
+PASSWORD: password8
+
+USERNAME: user9
+PASSWORD: password9

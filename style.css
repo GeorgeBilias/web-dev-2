@@ -384,6 +384,33 @@ form#loginForm input {
   border-radius: 5px;
   width: 200px; /* Adjust the width as needed */
 }
+.form-control label{ /* style each form label */
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.form-control input{  /* style each input box for a better border */
+  border: 1px solid black;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+}
+.form-control i{ /* make the icons invisible for incorrect and correct input */
+  visibility: hidden;
+  position: absolute;
+  right: 10px;
+  top: 33px;
+}
+
+form#loginForm i.fa-exclamation-circle {
+  color: red;
+  margin-left: 5px;
+  visibility: hidden;
+}
+form#loginForm i.fa-check-circle {
+  color: green;
+  margin-left: 5px;
+  visibility: hidden;
+}
 
 form#loginForm button {
   padding: 8px;
