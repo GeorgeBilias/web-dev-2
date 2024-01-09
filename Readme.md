@@ -1,0 +1,16 @@
+VALID PREMADE USERNAMES AND PASSWORDS:
+
+USERNAME: user1 
+PASSWORD: password1
+
+USERNAME: user2 
+PASSWORD: password2
+
+USERNAME: user3
+PASSWORD: password3
+
+USERNAME: user4
+PASSWORD: password4
+
+USERNAME: user5
+PASSWORD: password5
