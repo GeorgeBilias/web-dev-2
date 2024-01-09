@@ -105,8 +105,13 @@ function register() {
     })
     .then(response => {
         if (response.ok) {
+            alert('Επιτυχής εγγραφή. Παρακαλώ συνδεθείτε.');
             return { message: 'Registration successful' };
         } else {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            alert('Το όνομα χρήστη υπάρχει ήδη. Παρακαλώ επιλέξτε άλλο όνομα χρήστη.')
+            //RED BORDER TO INPUT FIELD
             return response.json();
         }
     })
@@ -154,10 +159,17 @@ async function login() {
         } else if (response.status === 401) {
             // Unauthorized (incorrect credentials)
             document.getElementById('message').innerText = 'Invalid credentials. Please try again.';
+            // add red border to input fields
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            alert('Λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά.')
         } else {
             // Other errors
             document.getElementById('message').innerText =
                 'An error occurred during login. Please try again later.';
+            // add red border to input fields
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
         }
     } catch (error) {
         console.error('Error during login:', error.message);
