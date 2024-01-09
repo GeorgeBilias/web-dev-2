@@ -59,6 +59,29 @@ function deleteFavorite(listingId) {
     });
 }
 
+function logout() {
+    fetch('http://localhost:3000/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            sessionId: sessionStorage.getItem('sessionId'),
+        }),
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Logged out successfully');
+                window.location.href = 'index.html';
+            } else {
+                console.error('Failed to log out');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    sessionStorage.removeItem('sessionId');
+    console.log(window.location);
+}
+
 window.onload = function() {
     const isLoggedIn = sessionStorage.getItem('sessionId') !== null;
     if (isLoggedIn) {
