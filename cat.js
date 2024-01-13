@@ -108,8 +108,8 @@ function register() {
             // Registration successful
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            document.getElementById('username').style.border = '1px solid green';
-            document.getElementById('password').style.border = '1px solid green';
+            document.getElementById('username').style.border = '2px solid green';
+            document.getElementById('password').style.border = '2px solid green';
             document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'visible';
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'visible';
             document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'hidden';
@@ -119,8 +119,8 @@ function register() {
         } else if (response.status === 400) {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            document.getElementById('username').style.border = '1px solid red';
-            document.getElementById('password').style.border = '1px solid red';
+            document.getElementById('username').style.border = '2px solid red';
+            document.getElementById('password').style.border = '2px solid red';
             document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
@@ -131,8 +131,8 @@ function register() {
         } else if (response.status === 401) {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            document.getElementById('username').style.border = '1px solid red';
-            document.getElementById('password').style.border = '1px solid red';
+            document.getElementById('username').style.border = '2px solid red';
+            document.getElementById('password').style.border = '2px solid red';
             document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
@@ -143,8 +143,8 @@ function register() {
         } else if (response.status === 402) {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            document.getElementById('username').style.border = '1px solid red';
-            document.getElementById('password').style.border = '1px solid red';
+            document.getElementById('username').style.border = '2px solid red';
+            document.getElementById('password').style.border = '2px solid red';
             document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
@@ -202,8 +202,8 @@ async function login() {
             // add red border to input fields
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            document.getElementById('username').style.border = '1px solid red';
-            document.getElementById('password').style.border = '1px solid red';
+            document.getElementById('username').style.border = '2px solid red';
+            document.getElementById('password').style.border = '2px solid red';
             // make the i visible in the input field
             document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
@@ -217,8 +217,8 @@ async function login() {
             // add red border to input fields
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            document.getElementById('username').style.border = '1px solid red';
-            document.getElementById('password').style.border = '1px solid red';
+            document.getElementById('username').style.border = '2px solid red';
+            document.getElementById('password').style.border = '2px solid red';
             // make the i visible in the input field
             document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
