@@ -61,7 +61,7 @@ app.post('/login', async (req, res) => {
 });
 
 // delete account endpoint
-app.post('/delete-account', async (req, res) => {
+app.delete('/delete-account', async (req, res) => {
     const { sessionId } = req.body;
     if (sessions.has(sessionId)) {
         const username = sessions.get(sessionId);

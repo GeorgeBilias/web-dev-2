@@ -344,7 +344,7 @@ function logout() {
 }
 function delete_account() {
     fetch('http://localhost:3000/delete-account', {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         },
