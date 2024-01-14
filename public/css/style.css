@@ -43,7 +43,6 @@ header {
   main {
     display: grid;
     grid-area: main; 
-    padding: 1rem;
   }
   
   .title {
@@ -241,9 +240,9 @@ header {
   }
   
   .grid {
-    margin:15%;
+    margin: 5%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
     gap: 20px;
     list-style: none;
     padding: 0;
@@ -254,7 +253,7 @@ header {
   }
 
   .grid .listing img {
-    width: 100%;
+    width: 50%;
     height: auto;
     margin-top: 5%;
     margin-bottom: 3%;
@@ -572,14 +571,10 @@ form#loginForm button:hover {
       grid-template-columns: 200px 1fr 200px; 
       grid-template-areas:
         "header header header"
-        "empty main empty" 
+        "main main main" 
         "footer footer footer";
     } 
-    body::after{
-      content: "";
-      grid-area: empty;
-      background-color: #f2f2f2;
-    } 
+    
     
     .main{
       grid-area: main;
@@ -629,20 +624,47 @@ form#loginForm button:hover {
 
 .subcategory-menu {
   display: flex;
-  flex-wrap: wrap;
+  display: inline-block;
   justify-content: center;
-  gap: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
+  margin-top: 15%;
 }
 
 .subcategory-label {
   display: flex;
   align-items: center;
   margin-right: 10px;
+  margin-top: 10%;
 }
 
 .subcategory-label input {
   margin-right: 5px;
+}
+/*make the main into a grid*/
+#main {
+  display: grid;
+  grid-template-rows: 1;
+  grid-template-columns: 200px 1fr;
+  grid-template-areas:
+    "subcategories listings";
+}
+
+#subcategories-container {
+  display: inline-block;
+  display: grid;
+  grid-area: subcategories;
+  grid-column: 1;
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+#subcategories-container:empty {
+  display: none;
+  
+}
+
+#listings-container {
+  display: grid;
+  grid-area: listings;
 }
