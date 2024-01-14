@@ -1,7 +1,7 @@
 VALID PREMADE USERNAMES AND PASSWORDS: (You can also register by selecting appropriate username and password.)
 
 USERNAME: user1 
-PASSWORD: password1
+PASSWORD: Password1
 
 USERNAME: user2 
 PASSWORD: password2
