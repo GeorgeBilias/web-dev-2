@@ -1,4 +1,4 @@
-VALID PREMADE USERNAMES AND PASSWORDS:
+VALID PREMADE USERNAMES AND PASSWORDS: (You can also register by selecting appropriate username and password.)
 
 USERNAME: user1 
 PASSWORD: password1
