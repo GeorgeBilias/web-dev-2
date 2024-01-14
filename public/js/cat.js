@@ -210,7 +210,18 @@ async function login() {
             window.location.reload();
         } else if (response.status === 401) {
             // Unauthorized (incorrect credentials)
-            document.getElementById('message').innerText = 'Invalid credentials. Please try again.';
+            // add red border to input fields
+            document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '2px solid green';
+            document.getElementById('password').style.border = '2px solid red';
+            // make the i visible in the input field
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
+            alert('Λάθος Κωδικός Πρόσβασης. Παρακαλώ προσπαθήστε ξανά.')
+        }else if (response.status === 402) {
+            // Unauthorized (incorrect credentials)
             // add red border to input fields
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
@@ -221,7 +232,7 @@ async function login() {
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
             document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
-            alert('Λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά.')
+            alert('Λάθος στοιχεία. Παρακαλώ προσπαθήστε ξανά.')	
         } else {
             // Other errors
             document.getElementById('message').innerText =

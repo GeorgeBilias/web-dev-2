@@ -53,8 +53,10 @@ app.post('/login', async (req, res) => {
         const sessionId = uuidv4();
         sessions.set(sessionId, username);
         res.json({ sessionId });
+    } else if (user && user.password !== password) {
+        res.status(401).json({ message: 'Wrong Password' });
     } else {
-        res.status(401).json({ message: 'Invalid credentials' });
+        res.status(402).json({ message: 'Invalid credentials' });
     }
 });
 
