@@ -195,14 +195,14 @@ async function login() {
         });
 
         const result = await response.json();
-
+        console.log("hellloooooo");
         if (response.ok) {
             // Successful authentication
-            document.getElementById('message').innerText = `Login successful. Session ID: ${result.sessionId}`;
             console.log("Session id from login service :"+result.sessionId);
             sessionId = result.sessionId;
             sessionStorage.setItem('sessionId', sessionId);
             sessionStorage.setItem('username', username);
+            console.log("hellloooooo");
             
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('logout-button').style.display = 'block';
