@@ -137,17 +137,29 @@ function register() {
             document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
             document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
-            alert('Username must be at least 3 characters long and not start with a number.')
+            alert('Username must be at least 3 characters long and not start with a number. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number.')
             //RED BORDER TO INPUT FIELD
             return response.json();
         } else if (response.status === 402) {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             document.getElementById('username').style.border = '2px solid red';
-            document.getElementById('password').style.border = '2px solid red';
+            document.getElementById('password').style.border = '2px solid green';
             document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'hidden';
-            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'visible';
             document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'hidden';
+            alert('Username must be at least 3 characters long and not start with a number.')
+            //RED BORDER TO INPUT FIELD
+            return response.json();
+        }else if(response.status === 403){
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('username').style.border = '2px solid green';
+            document.getElementById('password').style.border = '2px solid red';
+            document.getElementsByClassName('fas fa-check-circle')[0].style.visibility = 'visible';
+            document.getElementsByClassName('fas fa-check-circle')[1].style.visibility = 'hidden';
+            document.getElementsByClassName('fas fa-exclamation-circle')[0].style.visibility = 'hidden';
             document.getElementsByClassName('fas fa-exclamation-circle')[1].style.visibility = 'visible';
             alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number.')
             //RED BORDER TO INPUT FIELD
