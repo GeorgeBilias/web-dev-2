@@ -146,6 +146,7 @@ header {
   /* FOOTER */
 
   footer {
+    margin-top: 0;
     display: grid;
     grid-area: footer; 
     background-color: #1d1d1d;
@@ -642,26 +643,27 @@ form#loginForm button:hover {
 /*make the main into a grid*/
 #main {
   display: grid;
-  grid-template-rows: 1;
-  grid-template-columns: 200px 1fr;
   grid-template-areas:
     "subcategories listings";
+  margin-bottom: 20%;
 }
 
 #subcategories-container {
-  display: inline-block;
   display: grid;
   grid-area: subcategories;
   grid-column: 1;
+  grid-row: 2/4;
   gap: 10px;
   border: 1px solid #ccc;
   padding: 10px;
   background-color: #e0e0e0;
   font-weight: bold;
+  width: 200px; /* Set a fixed width */
 }
-#subcategories-container:empty {
-  display: none;
+#subcategories-container {
   
+  min-height: 100vh;
+
 }
 
 #listings-container {
