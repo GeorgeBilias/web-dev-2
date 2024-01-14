@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WikiAds Categories</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Subcategory Listings</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="photos/logo/unique_logo.png">
 </head>
 <body>
-    <header>
 
-        
+    <header>
 
         <div class="title">
             <img src="photos/logo/unique_logo.png" alt="logo" width="100" height="100">
@@ -21,37 +20,56 @@
         <div class="main-bar">
         <nav>
             <ul>
-                <li class="active"><a href="index.html">AΡΧΙΚΗ ΣΕΛΙΔΑ</a></li>
+                <li><a href="index.html">AΡΧΙΚΗ ΣΕΛΙΔΑ</a></li>
             </ul>
         </nav>    
         </div>
-
         
     </header>
 
     <main>
 
-        <div id="categories-container"></div>
+        <div id="listings-container"></div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
-        <script src="code.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+        <script src="js/sub.js"></script>
+        
 
-        <script id="category-template" type="text/x-handlebars-template">
-            <div>
-                <ol class="grid3">
-                    {{#each categories}}
-                        <li>
-                            <div class="category">
-                                <h2>{{title}}</h2>
-                                <a href="category.html?id={{id}}"> <!-- leads to category page --> 
-                                    <img src="https://wiki-ads.onrender.com/{{img_url}}" alt="{{title}}">
-                                </a>
-                                
-                                {{#each subcategories}}
-                                    <a href="subcategory.html?subcategory={{id}}">{{title}}</a><br> <!-- leads to subcategory page -->
-                                {{/each}}
-                                
-                            </div>
+        
+    <script id="listing-template" type="text/x-handlebars-template">
+            <div class="listings2">
+                <ol class="grid2">
+                    {{#each listings}}
+                        <li class="listing2">
+                            <h3>{{title}}</h3>
+                            <ul>
+                                <li class="img">
+                                    <ul>
+                                        <div class="'img-container">
+                                            {{#each images}}
+                                                <img src="https://wiki-ads.onrender.com/{{this}}" alt="" height="200px">
+                                        {{/each}}
+                                        </div>
+                                    </ul>
+                                </li>
+                                <li>{{description}}</li>
+                                <table class="table">
+                                <tbody>
+                                    {{#each (split features ';')}}
+                                        {{#with (split this ':')}}
+                                            <tr>
+                                                <td>{{this.[0]}}</td>
+                                                <td>{{this.[1]}}</td>
+                                            </tr>
+                                        {{/with}}
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                                <div class="cost">
+                                    <li class="cost">{{cost}} €</li>
+                                </div>
+                            </ul>
                         </li>
                     {{/each}}
                 </ol>
@@ -94,5 +112,4 @@
     </footer>
     
 </body>
-
 </html>
