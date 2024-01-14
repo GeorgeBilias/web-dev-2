@@ -438,7 +438,7 @@ form#loginForm button:hover {
 
 /* Add this CSS to your style.css file or in a style block in your HTML file */
 #favorites-button {
-  position: fixed;
+  position: absolute;
   top: 10px;
   right: 10px;
   background-color: #333; /* Green background color */
