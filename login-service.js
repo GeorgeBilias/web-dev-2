@@ -60,6 +60,20 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// delete account endpoint
+app.post('/delete-account', async (req, res) => {
+    const { sessionId } = req.body;
+    if (sessions.has(sessionId)) {
+        const username = sessions.get(sessionId);
+        const collection = client.db(dbName).collection("users");
+        await collection.deleteOne({ username: username });
+        sessions.delete(sessionId);
+        res.sendStatus(200);
+    } else {
+        res.status(401).json({ message: 'Invalid session ID' });
+    }
+});
+
 // Registration endpoint
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;

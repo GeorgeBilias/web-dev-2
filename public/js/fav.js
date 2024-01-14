@@ -82,16 +82,43 @@ function logout() {
     console.log(window.location);
 }
 
+function delete_account() {
+    fetch('http://localhost:3000/delete-account', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            sessionId: sessionStorage.getItem('sessionId'),
+        }),
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Account deleted successfully');
+                window.location.href = 'index.html';
+            } else {
+                console.error('Failed to delete account');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    sessionStorage.removeItem('sessionId');
+    console.log(window.location);
+
+}
+
+
 window.onload = function() {
     const isLoggedIn = sessionStorage.getItem('sessionId') !== null;
     if (isLoggedIn) {
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('logout-button').style.display = 'block';
         document.getElementById('favorites-button').style.display = 'block';
+        document.getElementById('delete-button').style.display = 'block';
         
     } else {
         document.getElementById('login-section').style.display = 'block';
         document.getElementById('logout-button').style.display = 'none';
         document.getElementById('favorites-button').style.display = 'none';
+        document.getElementById('delete-button').style.display = 'none';
     }
 }
