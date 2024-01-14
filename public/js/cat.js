@@ -195,14 +195,12 @@ async function login() {
         });
 
         const result = await response.json();
-        console.log("hellloooooo");
         if (response.ok) {
             // Successful authentication
             console.log("Session id from login service :"+result.sessionId);
             sessionId = result.sessionId;
             sessionStorage.setItem('sessionId', sessionId);
             sessionStorage.setItem('username', username);
-            console.log("hellloooooo");
             
             document.getElementById('login-section').style.display = 'none';
             document.getElementById('logout-button').style.display = 'block';
@@ -342,29 +340,6 @@ function logout() {
     sessionStorage.removeItem('sessionId');
     console.log(window.location);
 }
-function delete_account() {
-    fetch('http://localhost:3000/delete-account', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            sessionId: sessionStorage.getItem('sessionId'),
-        }),
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('Account deleted successfully');
-                window.location.href = 'index.html';
-            } else {
-                console.error('Failed to delete account');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    sessionStorage.removeItem('sessionId');
-    console.log(window.location);
-
-}
 
 async function checkFavorites() {
     const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
@@ -400,11 +375,9 @@ window.onload = function() {
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('logout-button').style.display = 'block';
         document.getElementById('favorites-button').style.display = 'block';
-        document.getElementById('delete-button').style.display = 'block';
     } else {
         document.getElementById('login-section').style.display = 'block';
         document.getElementById('logout-button').style.display = 'none';
         document.getElementById('favorites-button').style.display = 'none';
-        document.getElementById('delete-button').style.display = 'none';
     }
 }
