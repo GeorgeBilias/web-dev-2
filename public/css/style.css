@@ -264,6 +264,12 @@ header {
   .grid .listing .cost {
     margin-top: 3%;
     font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    left: 0; /* Align the left edge of the .cost element with the left edge of the .listing element */
+    right: 0; /* Align the right edge of the .cost element with the right edge of the .listing element */
+    text-align: center; /* Center the text within the .cost element */
+    align-items: center;
   }
  
   .listing {
@@ -273,6 +279,7 @@ header {
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     margin-bottom: 7%;
+    position: relative;
   }
   .grid li h5{
     color:#555;
