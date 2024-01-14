@@ -357,12 +357,6 @@ header {
     overflow-x: hidden;
   }
 
-
-  
-aside {
-  display: grid; 
-} 
-
 .grid3 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -545,16 +539,12 @@ form#loginForm button:hover {
       grid-template-columns: 200px 1fr; 
       grid-template-areas:
         "header header"
-        "aside main"
+        "main main"
         "footer footer";
     } 
     .main{
       grid-area: main;
     } 
-    .aside{
-      grid-area: aside;
-      background-color: #f2f2f2;
-    }
     header,
     footer {
       grid-column: span 2; 
@@ -582,7 +572,7 @@ form#loginForm button:hover {
       grid-template-columns: 200px 1fr 200px; 
       grid-template-areas:
         "header header header"
-        "aside main empty" 
+        "empty main empty" 
         "footer footer footer";
     } 
     body::after{
