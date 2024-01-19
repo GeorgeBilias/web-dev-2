@@ -29,6 +29,11 @@ async function getFavorites() {
                 const template = Handlebars.compile(source);
                 const html = template({listings: listings});
                 listingsContainer.innerHTML = html;
+            }else{
+                // If listings is empty, add some empty space
+                const emptySpaceDiv = document.createElement('div');
+                emptySpaceDiv.style.height = '300px'; // Adjust this value as needed
+                listingsContainer.appendChild(emptySpaceDiv);
             }
         }
     } catch (error) {
