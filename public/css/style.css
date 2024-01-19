@@ -527,6 +527,7 @@ form#loginForm button:hover {
     text-align: center;
   
   } 
+  
 }
 
   
@@ -666,11 +667,7 @@ form#loginForm button:hover {
   background-color: #e0e0e0;
   font-weight: bold;
   width: 200px; /* Set a fixed width */
-}
-#subcategories-container {
-  
   min-height: 100vh;
-
 }
 
 #listings-container {
