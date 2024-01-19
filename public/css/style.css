@@ -677,3 +677,13 @@ form#loginForm button:hover {
   display: grid;
   grid-area: listings;
 }
+
+#delete-account-button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  margin-top: 5px;
+}
