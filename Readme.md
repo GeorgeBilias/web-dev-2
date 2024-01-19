@@ -4,7 +4,7 @@ USERNAME: user1
 PASSWORD: Password1
 
 USERNAME: user2 
-PASSWORD: password2
+PASSWORD: Password2
 
 USERNAME: user3
 PASSWORD: password3
