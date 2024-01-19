@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -14,6 +15,9 @@ const dbName = "Cluster0"; // Replace with your database name
 
 app.use(bodyParser.json());
 app.use(cors());
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // CORS middleware setup
 app.use((req, res, next) => {
@@ -40,6 +44,20 @@ connectDB();
 
 // Session storage
 const sessions = new Map();
+
+// serve index.html as content root
+app.get('/', function(req, res){
+
+    var options = {
+        root: path.join(__dirname, 'public')
+    }
+
+    res.sendFile('index.html', options, function(err){
+        console.log(err)
+    })
+})
+
+
 
 // Login endpoint
 app.post('/login', async (req, res) => {
