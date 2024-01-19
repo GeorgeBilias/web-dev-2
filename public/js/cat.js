@@ -342,6 +342,13 @@ async function logout() {
         window.location.href = 'index.html';
     }
 }
+
+document.querySelector('#logout-button').addEventListener('click', async (event) => {
+    event.preventDefault(); // Prevent the default action
+    await logout();
+});
+
+
 // delete account function
 async function deleteAccount() {
     const response = await fetch('http://localhost:3000/delete-account', {

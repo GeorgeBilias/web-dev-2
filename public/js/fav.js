@@ -89,6 +89,11 @@ async function logout() {
     }
 }
 
+document.querySelector('#logout-button').addEventListener('click', async (event) => {
+    event.preventDefault(); // Prevent the default action
+    await logout();
+});
+
 async function deleteAccount() {
     try {
         const response = await fetch('http://localhost:3000/delete-account', {
