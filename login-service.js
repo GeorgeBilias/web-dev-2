@@ -207,6 +207,19 @@ app.post('/logout', (req, res) => {
     }
 });
 
+// delete account endpoint
+app.post('/delete-account', async (req, res) => {
+    const { sessionId } = req.body;
+    if (sessions.has(sessionId)) {
+        const username = sessions.get(sessionId);
+        const collection = client.db(dbName).collection("users");
+        await collection.deleteOne({ username: username });
+        res.sendStatus(200);
+    } else {
+        res.status(401).json({ message: 'Invalid session ID' });
+    }
+});
+
 // Delete favorite endpoint
 app.post('/delete-favorite', async (req, res) => {
     const { sessionId, listingId } = req.body;

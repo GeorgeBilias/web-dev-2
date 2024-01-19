@@ -342,6 +342,31 @@ async function logout() {
         window.location.href = 'index.html';
     }
 }
+// delete account function
+async function deleteAccount() {
+    try {
+        const response = await fetch('http://localhost:3000/delete-account', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sessionId: sessionStorage.getItem('sessionId'),
+            }),
+        });
+
+        if (response.ok) {
+            console.log('Account deleted successfully');
+        } else {
+            console.error('Failed to delete account');
+        }
+    } catch (error) {
+        console.error('Error during account deletion:', error);
+    } finally {
+        sessionStorage.removeItem('sessionId');
+        window.location.href = 'index.html';
+    }
+}
 
 async function checkFavorites() {
     const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage
@@ -377,9 +402,11 @@ window.onload = function() {
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('logout-button').style.display = 'block';
         document.getElementById('favorites-button').style.display = 'block';
+        document.getElementById('delete-account-button').style.display = 'block';
     } else {
         document.getElementById('login-section').style.display = 'block';
         document.getElementById('logout-button').style.display = 'none';
         document.getElementById('favorites-button').style.display = 'none';
+        document.getElementById('delete-account-button').style.display = 'none';
     }
 }
