@@ -344,29 +344,29 @@ async function logout() {
 }
 // delete account function
 async function deleteAccount() {
-    try {
-        const response = await fetch('http://localhost:3000/delete-account', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                sessionId: sessionStorage.getItem('sessionId'),
-            }),
-        });
+    const response = await fetch('http://localhost:3000/delete-account', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            sessionId: sessionStorage.getItem('sessionId'),
+        }),
+    });
 
-        if (response.ok) {
-            console.log('Account deleted successfully');
-        } else {
-            console.error('Failed to delete account');
-        }
-    } catch (error) {
-        console.error('Error during account deletion:', error);
-    } finally {
+    if (response.ok) {
+        console.log('Account deleted successfully');
         sessionStorage.removeItem('sessionId');
         window.location.href = 'index.html';
+    } else {
+        console.error('Failed to delete account');
     }
 }
+
+document.querySelector('#delete-account-button').addEventListener('click', async (event) => {
+    event.preventDefault(); // Prevent the default action
+    await deleteAccount();
+});
 
 async function checkFavorites() {
     const sessionId = sessionStorage.getItem('sessionId'); // Get sessionId from sessionStorage

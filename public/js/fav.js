@@ -109,6 +109,12 @@ async function deleteAccount() {
     }
 }
 
+document.querySelector('#delete-account-button').addEventListener('click', async (event) => {
+    event.preventDefault(); // Prevent the default action
+    await deleteAccount();
+});
+
+
 window.onload = function() {
     const isLoggedIn = sessionStorage.getItem('sessionId') !== null;
     if (isLoggedIn) {
